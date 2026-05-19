@@ -8,7 +8,9 @@ COPY package.json bun.lock turbo.json ./
 
 # workspace manifests
 COPY packages/auth/package.json ./packages/auth/package.json
-COPY packages/db/package.json ./packages/db/package.json
+COPY packages/eslint-config/package.json ./packages/eslint-config/package.json
+COPY packages/typescript-config/package.json ./packages/typescript-config/package.json
+COPY packages/ui/package.json ./packages/ui/package.json
 
 # app manifests
 COPY apps/auth-service/package.json ./apps/auth-service/package.json
