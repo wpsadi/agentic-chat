@@ -1,0 +1,20 @@
+{
+  "name": "auth-service",
+  "scripts": {
+    "dev": "bun run --hot src/index.ts",
+    "prestart": "bun run build",
+    "start": "bun run build/index.js",
+    "build":"bun build src/index.ts --outdir ./build --target=node"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.0.3",
+    "@hono/zod-openapi": "^1.4.0",
+    "@repo/auth": "workspace:*",
+    "@scalar/hono-api-reference": "^0.10.16",
+    "@scalar/openapi-to-markdown": "^0.5.17",
+    "hono": "^4.12.19"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
