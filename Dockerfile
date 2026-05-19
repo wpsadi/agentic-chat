@@ -17,7 +17,7 @@ COPY apps/auth-service/package.json ./apps/auth-service/package.json
 COPY apps/mail-service/package.json ./apps/mail-service/package.json
 
 # install deps
-RUN bun install --frozen-lockfile --no-optional
+RUN bun install --frozen-lockfile
 
 # copy remaining source
 COPY . .
