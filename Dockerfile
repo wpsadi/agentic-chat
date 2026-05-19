@@ -28,7 +28,7 @@ COPY --from=mail-build /app/apps/mail-service/build ./mail
 # COPY --from=web-build /app/apps/web/.next ./web
 
 # optional startup script
-COPY start.sh .
+COPY scripts/start.sh .
 RUN chmod +x start.sh
 
 EXPOSE 12000
