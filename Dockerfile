@@ -3,32 +3,38 @@ FROM oven/bun:1 AS base
 
 WORKDIR /app
 
-# copy only manifests first
-COPY package.json bun.lock ./
+# root manifests
+COPY package.json bun.lock turbo.json ./
+
+# workspace manifests
+COPY packages/auth/package.json ./packages/auth/package.json
+COPY packages/db/package.json ./packages/db/package.json
+
+# app manifests
 COPY apps/auth-service/package.json ./apps/auth-service/package.json
 COPY apps/mail-service/package.json ./apps/mail-service/package.json
 
-# install deps once
+# install deps
 RUN bun install --frozen-lockfile --no-optional
 
-# now copy source
+# copy remaining source
 COPY . .
 
-# ===== Auth Service Build =====
+# ===== Auth Build =====
 FROM base AS auth-build
 
 WORKDIR /app/apps/auth-service
 
 RUN bun run build
 
-# ===== Mail Service Build =====
+# ===== Mail Build =====
 FROM base AS mail-build
 
 WORKDIR /app/apps/mail-service
 
 RUN bun run build
 
-# ===== Final Runtime =====
+# ===== Runtime =====
 FROM oven/bun:1 AS runtime
 
 WORKDIR /app
